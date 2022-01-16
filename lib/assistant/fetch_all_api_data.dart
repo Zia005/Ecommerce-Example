@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:ecommerce_78/model/get_all_category_list.dart';
 import 'package:ecommerce_78/model/get_all_product_list.dart';
 import 'package:ecommerce_78/model/get_all_sliders.dart';
@@ -8,48 +7,80 @@ import 'package:ecommerce_78/model/get_order_list.dart';
 import 'package:ecommerce_78/model/get_order_summary.dart';
 import 'package:http/http.dart' as http;
 
-class FetchAllApiData{
+class LoadAllApiData{
 
-  final clientObject = http.Client;
-
-  Future<List<GetOrderList>> fetchAllOrderData(clientObject) async{
+  static Future<List<GetAllOrderList>?> fetchAllOrderData() async{
     var url = Uri.parse("https://happybuy.appsticit.com/orders");
-    var heroResponse = await clientObject.get(url);
+    var heroResponse = await http.get(url,headers: {"Content-Type": "application/json"});
 
-    // if(heroResponse.statusCode == 200){
-    //   var jsonDecode = json.decode(heroResponse.body);
-    // }
-    return getOrderListFromJson(heroResponse.body);
+    if(heroResponse.statusCode == 200){
+      var jsonDecode = json.decode(heroResponse.body);
+      var convertData = json.encode(jsonDecode);
+      // print(heroResponse.body);
+      // print(jsonDecode);
+      // print(convertData);
+      return getOrderListFromJson(convertData);
+    }
+
+    return null;
+
   }
 
-  Future<GetAllCategoryList> fetchAllCategoryData(http.Client client) async{
+  static Future<GetAllCategoryList?> fetchAllCategoryData() async{
     var url = Uri.parse("https://happybuy.appsticit.com/getallcategory");
-    var heroResponse = await client.get(url);
-    return getAllCategoryListFromJson(heroResponse.body);
+    var heroResponse = await http.get(url,headers: {"Content-Type": "application/json"});
+    if(heroResponse.statusCode == 200){
+      var jsonDecode = json.decode(heroResponse.body);
+      var convertData = json.encode(jsonDecode);
+      return getAllCategoryListFromJson(heroResponse.body);
+    }
+
+    return null;
   }
 
-  Future<GetAllProductData> fetchAllProductData(http.Client client) async {
+  static Future<GetAllProductList?> fetchAllProductData() async {
     var url = Uri.parse("https://happybuy.appsticit.com/getallproductdata");
-    var heroResponse = await client.get(url);
-    return getAllProductDataFromJson(heroResponse.body);
+    var heroResponse = await http.get(url,headers: {"Content-Type": "application/json"});
+    if(heroResponse.statusCode == 200){
+      var jsonDecode = json.decode(heroResponse.body);
+      var convertData = json.encode(jsonDecode);
+      return getAllProductDataFromJson(heroResponse.body);
+    }
+
+    return null;
   }
 
-  Future<GetAllSlider> fetchAllSliderData(http.Client client) async{
+  static Future<GetAllSliderList?> fetchAllSliderData() async{
     var url = Uri.parse("https://happybuy.appsticit.com/getallsliders");
-    var heroResponse = await client.get(url);
-    return getAllSliderFromJson(heroResponse.body);
+    var heroResponse = await http.get(url,headers: {"Content-Type": "application/json"});
+    if(heroResponse.statusCode == 200){
+      var jsonDecode = json.decode(heroResponse.body);
+      var convertData = json.encode(jsonDecode);
+      return getAllSliderFromJson(heroResponse.body);
+    }
+    return null;
   }
 
-  Future<UserData> fetchAllUserData(http.Client client) async{
+  static Future<GetAllUserList?> fetchAllUserData() async{
     var url = Uri.parse("https://happybuy.appsticit.com/allUserList");
-    var heroResponse = await client.get(url);
-    return getAllUserDataFromJson(heroResponse.body);
+    var heroResponse = await http.get(url,headers: {"Content-Type": "application/json"});
+    if(heroResponse.statusCode == 200){
+      var jsonDecode = json.decode(heroResponse.body);
+      var convertData = json.encode(jsonDecode);
+      return getAllUserDataFromJson(heroResponse.body);
+    }
+    return null;
   }
 
-  Future<GetOrderSummary> fetchAllOrderSummaryData(http.Client client) async{
+  static Future<GetAllOrderSummaryList?> fetchAllOrderSummaryData() async{
     var url = Uri.parse("https://happybuy.appsticit.com/orders");
-    var heroResponse = await client.get(url);
-    return getAllOrderSummaryFromJson(heroResponse.body);
+    var heroResponse = await http.get(url,headers: {"Content-Type": "application/json"});
+    if(heroResponse.statusCode == 200){
+      var jsonDecode = json.decode(heroResponse.body);
+      var convertData = json.encode(jsonDecode);
+      return getAllOrderSummaryFromJson(heroResponse.body);
+    }
+    return null;
   }
 
 }

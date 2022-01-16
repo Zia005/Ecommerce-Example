@@ -1,8 +1,9 @@
 import 'package:ecommerce_78/assistant/user_info.dart';
+import 'package:ecommerce_78/screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
+
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -147,7 +148,7 @@ class _SignInPageState extends State<SignInPage> {
                               if(ok){
                                 user.saveUserNameToSharedPreference(nameController.text);
                               }
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                            }
                         },
                         shape: RoundedRectangleBorder(

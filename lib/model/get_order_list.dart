@@ -5,16 +5,16 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-List<GetOrderList> getOrderListFromJson(String str) {
-  return List<GetOrderList>.from(json.decode(str).map((x) {
-    return GetOrderList.fromJson(x);
+List<GetAllOrderList> getOrderListFromJson(String str) {
+  return List<GetAllOrderList>.from(json.decode(str).map((x) {
+    return GetAllOrderList.fromJson(x);
   }));
 }
 
-String getOrderListToJson(List<GetOrderList> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String getOrderListToJson(List<GetAllOrderList> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class GetOrderList {
-  GetOrderList({
+class GetAllOrderList {
+  GetAllOrderList({
     required this.id,
     required this.userId,
     required this.totalPrice,
@@ -34,7 +34,7 @@ class GetOrderList {
   User user;
   Shipping shipping;
 
-  factory GetOrderList.fromJson(Map<String, dynamic> json) => GetOrderList(
+  factory GetAllOrderList.fromJson(Map<String, dynamic> json) => GetAllOrderList(
     id: json["id"],
     userId: json["user_id"],
     totalPrice: json["total_price"],

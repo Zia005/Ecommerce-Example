@@ -5,12 +5,12 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-GetAllSlider getAllSliderFromJson(String str) => GetAllSlider.fromJson(json.decode(str));
+GetAllSliderList getAllSliderFromJson(String str) => GetAllSliderList.fromJson(json.decode(str));
 
-String getAllSliderToJson(GetAllSlider data) => json.encode(data.toJson());
+String getAllSliderToJson(GetAllSliderList data) => json.encode(data.toJson());
 
-class GetAllSlider {
-  GetAllSlider({
+class GetAllSliderList {
+  GetAllSliderList({
     required this.status,
     required this.msg,
     required this.data,
@@ -20,7 +20,7 @@ class GetAllSlider {
   String msg;
   List<Datum> data;
 
-  factory GetAllSlider.fromJson(Map<String, dynamic> json) => GetAllSlider(
+  factory GetAllSliderList.fromJson(Map<String, dynamic> json) => GetAllSliderList(
     status: json["status"],
     msg: json["msg"],
     data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),

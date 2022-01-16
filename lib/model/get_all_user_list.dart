@@ -5,12 +5,12 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-UserData getAllUserDataFromJson(String str) => UserData.fromJson(json.decode(str));
+GetAllUserList getAllUserDataFromJson(String str) => GetAllUserList.fromJson(json.decode(str));
 
-String userDataToJson(UserData data) => json.encode(data.toJson());
+String userDataToJson(GetAllUserList data) => json.encode(data.toJson());
 
-class UserData {
-  UserData({
+class GetAllUserList {
+  GetAllUserList({
     required this.status,
     required this.msg,
     required this.data,
@@ -20,7 +20,7 @@ class UserData {
   String msg;
   List<Datum> data;
 
-  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
+  factory GetAllUserList.fromJson(Map<String, dynamic> json) => GetAllUserList(
     status: json["status"],
     msg: json["msg"],
     data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),

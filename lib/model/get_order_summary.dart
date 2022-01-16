@@ -5,12 +5,12 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-GetOrderSummary getAllOrderSummaryFromJson(String str) => GetOrderSummary.fromJson(json.decode(str));
+GetAllOrderSummaryList getAllOrderSummaryFromJson(String str) => GetAllOrderSummaryList.fromJson(json.decode(str));
 
-String getOrderSummaryToJson(GetOrderSummary data) => json.encode(data.toJson());
+String getOrderSummaryToJson(GetAllOrderSummaryList data) => json.encode(data.toJson());
 
-class GetOrderSummary {
-  GetOrderSummary({
+class GetAllOrderSummaryList {
+  GetAllOrderSummaryList({
     required this.newOrder,
     required this.processingOrder,
     required this.driveredOrder,
@@ -34,7 +34,7 @@ class GetOrderSummary {
   int totalCustomer;
   int totalOrder;
 
-  factory GetOrderSummary.fromJson(Map<String, dynamic> json) => GetOrderSummary(
+  factory GetAllOrderSummaryList.fromJson(Map<String, dynamic> json) => GetAllOrderSummaryList(
     newOrder: json["new_order"],
     processingOrder: json["processing_order"],
     driveredOrder: json["drivered_order"],

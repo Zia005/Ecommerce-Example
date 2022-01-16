@@ -5,12 +5,12 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-GetAllProductData getAllProductDataFromJson(String str) => GetAllProductData.fromJson(json.decode(str));
+GetAllProductList getAllProductDataFromJson(String str) => GetAllProductList.fromJson(json.decode(str));
 
-String getAllProductDataToJson(GetAllProductData data) => json.encode(data.toJson());
+String getAllProductDataToJson(GetAllProductList data) => json.encode(data.toJson());
 
-class GetAllProductData {
-  GetAllProductData({
+class GetAllProductList {
+  GetAllProductList({
     required this.status,
     required this.msg,
     required this.data,
@@ -20,7 +20,7 @@ class GetAllProductData {
   String msg;
   List<DataObject> data;
 
-  factory GetAllProductData.fromJson(Map<String, dynamic> json) => GetAllProductData(
+  factory GetAllProductList.fromJson(Map<String, dynamic> json) => GetAllProductList(
     status: json["status"],
     msg: json["msg"],
     data: List<DataObject>.from(json["data"].map((x) => DataObject.fromJson(x))),
@@ -32,6 +32,8 @@ class GetAllProductData {
     "data": List<dynamic>.from(data.map((x) => x.toJson())),
   };
 }
+
+
 class DataObject {
   DataObject({
     required this.id,
