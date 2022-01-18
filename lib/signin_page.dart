@@ -3,8 +3,6 @@ import 'package:ecommerce_78/screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -13,13 +11,12 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-
-  final globalKey=GlobalKey<FormState>();
+  final globalKey = GlobalKey<FormState>();
 
   TextEditingController nameController = new TextEditingController();
   TextEditingController passController = new TextEditingController();
 
-  Widget textFormField (String hint, String label, var controller, String type){
+  Widget textFormField(String hint, String label, var controller, String type) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
@@ -29,41 +26,39 @@ class _SignInPageState extends State<SignInPage> {
         hintText: hint,
         labelText: label,
       ),
-      validator: (value){
-        if(type=='name'){
-          if(value!.length>3){
+      validator: (value) {
+        if (type == 'name') {
+          if (value!.length > 3) {
             return null;
+          } else {
+            return "Name length must be more than 3 letters";
           }
-          else{
-            return  "Name length must be more than 3 letters";
-          }
-        }else{
-          if(value!.length>7){
+        } else {
+          if (value!.length > 7) {
             return null;
-          }
-          else{
-            return  "Password length must be more than 7 letters";
+          } else {
+            return "Password length must be more than 7 letters";
           }
         }
       },
     );
   }
 
-  bool ok=false;
+  bool ok = false;
 
   @override
   Widget build(BuildContext context) {
-    var height=MediaQuery.of(context).size.height;
-    var width=MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
           Container(
             color: Color(0xff640999),
-            height: height*.4,
+            height: height * .4,
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(width*.4, height*.17, 0, 0),
+            padding: EdgeInsets.fromLTRB(width * .4, height * .17, 0, 0),
             child: Column(
               children: [
                 Text(
@@ -79,7 +74,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: height*.35),
+            padding: EdgeInsets.only(top: height * .35),
             child: Card(
               elevation: 15,
               shape: RoundedRectangleBorder(
@@ -93,7 +88,8 @@ class _SignInPageState extends State<SignInPage> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, height*.05, width*.40, 0),
+                      padding:
+                          EdgeInsets.fromLTRB(0, height * .05, width * .40, 0),
                       child: Text(
                         'Sign in to go ahead',
                         style: TextStyle(
@@ -105,70 +101,75 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(width*.15, height*.05, width*.15, 0),
-                      child: textFormField('Username','Username',nameController,'name'),
+                      padding: EdgeInsets.fromLTRB(
+                          width * .15, height * .05, width * .15, 0),
+                      child: textFormField(
+                          'Username', 'Username', nameController, 'name'),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(width*.15, height*.05, width*.15, 0),
-                      child: textFormField('Password','Password',passController,'pass'),
+                      padding: EdgeInsets.fromLTRB(
+                          width * .15, height * .05, width * .15, 0),
+                      child: textFormField(
+                          'Password', 'Password', passController, 'pass'),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(width*.15, height*.01, width*.15, 0),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            value: ok,
-                            onChanged: (val){
-                              setState(() {
-                                ok=!ok;
-                              });
-                            }
-                          ),
-                          Text('Save Password'),
-                          Padding(
-                            padding: EdgeInsets.only(left: width*.1),
-                            child: TextButton(
-                              onPressed: (){
-
-                              },
-                              child: Text(
-                                'Forgot Password?',
-                              ),
-                            )
-                          )
-                        ],
-                      )
-                    ),
+                        padding: EdgeInsets.fromLTRB(
+                            width * .15, height * .01, width * .15, 0),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                                value: ok,
+                                onChanged: (val) {
+                                  setState(() {
+                                    ok = !ok;
+                                  });
+                                }),
+                            Text('Save Password'),
+                            Padding(
+                                padding: EdgeInsets.only(left: width * .1),
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'Forgot Password?',
+                                  ),
+                                ))
+                          ],
+                        )),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(width*.3, height*.05, width*.3, 0),
-                      child: MaterialButton(
-                        onPressed: (){
-                           if(globalKey.currentState!.validate()){
+                        padding: EdgeInsets.fromLTRB(
+                            width * .3, height * .05, width * .3, 0),
+                        child: MaterialButton(
+                          onPressed: () {
+                            if (globalKey.currentState!.validate()) {
                               UserInfo user = UserInfo();
-                              if(ok){
-                                user.saveUserNameToSharedPreference(nameController.text);
+                              if (ok) {
+                                user.saveUserNameToSharedPreference(
+                                    nameController.text);
                               }
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-                           }
-                        },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        color: Colors.blue,
-                        height: height*.07,
-                        minWidth: width*.3,
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreen()));
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                        ),
-                      )
-                    ),
+                          color: Colors.blue,
+                          height: height * .07,
+                          minWidth: width * .3,
+                          child: Text(
+                            'Sign In',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )),
                     Padding(
-                        padding: EdgeInsets.fromLTRB(width*.1, height*.02, width*.15, 0),
+                        padding: EdgeInsets.fromLTRB(
+                            width * .1, height * .02, width * .15, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -182,22 +183,18 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                             ),
                             TextButton(
-                              onPressed: (){
-
-                              },
-                              child: Text(
-                                'Create one',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              )
-                            ),
+                                onPressed: () {},
+                                child: Text(
+                                  'Create one',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                )),
                           ],
-                        )
-                    ),
+                        )),
                   ],
                 ),
               ),

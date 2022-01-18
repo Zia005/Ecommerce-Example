@@ -5,48 +5,12 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-GetAllCategoryList getAllCategoryListFromJson(String str) {
-    return GetAllCategoryList.fromJson(json.decode(str));
-}
+List<GetAllCategoryList> getAllCategoryListFromJson(String str) => List<GetAllCategoryList>.from(json.decode(str).map((x) => GetAllCategoryList.fromJson(x)));
 
-String getAllCategoryListToJson(GetAllCategoryList data) {
-    return json.encode(data.toJson());
-}
+String getAllCategoryListToJson(List<GetAllCategoryList> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class GetAllCategoryList {
     GetAllCategoryList({
-        required this.status,
-        required this.msg,
-        required this.data,
-    });
-
-    String status;
-    String msg;
-    List<Datum> data;
-
-    factory GetAllCategoryList.fromJson(Map<String, dynamic> json) => GetAllCategoryList(
-        status: json["status"],
-        msg: json["msg"],
-        data: List<Datum>.from(
-            json["data"].map((x) {
-                return Datum.fromJson(x);
-            })
-        ),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "status": status,
-        "msg": msg,
-        "data": List<dynamic>.from(
-            data.map((x) {
-                return x.toJson();
-            })
-        ),
-    };
-}
-
-class Datum {
-    Datum({
         required this.id,
         required this.name,
         required this.categoryImage,
@@ -58,14 +22,12 @@ class Datum {
     String categoryImage;
     int isActive;
 
-    factory Datum.fromJson(Map<String, dynamic> json) {
-        return Datum(
-            id: json["id"],
-            name: json["name"],
-            categoryImage: json["category_image"],
-            isActive: json["is_active"],
-        );
-    }
+    factory GetAllCategoryList.fromJson(Map<String, dynamic> json) => GetAllCategoryList(
+        id: json["id"],
+        name: json["name"],
+        categoryImage: json["category_image"],
+        isActive: json["is_active"],
+    );
 
     Map<String, dynamic> toJson() => {
         "id": id,

@@ -7,13 +7,13 @@ import 'assistant/user_info.dart';
 
 void main() {
   runApp(
-    MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyApp()
-    )
+      MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: MyApp()
+      )
   );
 }
 
@@ -35,12 +35,12 @@ class _MyAppState extends State<MyApp> {
     getSharedPreferenceData();
 
     Future.delayed(Duration(seconds: 3)).whenComplete(() {
-        if(userName != null){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-        }else{
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
-        }
+      if(userName != null){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      }else{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
       }
+    }
     );
   }
 

@@ -33,16 +33,17 @@ class Controller extends GetxController{
     getAllProductList();
   }
 
-  getAllCategoryList() async{
+  void getAllCategoryList() async{
     try{
       loadingCategoryList(true).obs;
       var data = await LoadAllApiData.fetchAllCategoryData();
 
       if(data != null){
-        dataCategoryList = data as RxList<GetAllCategoryList>;
+        print(data.toList().toString()+" data");
+        dataCategoryList.value = data;
       }
     }catch(e){
-      print(e);
+      print(e.toString()+ "Category Error");
     }finally{
       loadingCategoryList(false).obs;
     }
@@ -54,10 +55,10 @@ class Controller extends GetxController{
       var data = await LoadAllApiData.fetchAllOrderData();
 
       if(data != null){
-        dataOrderList = data as RxList<GetAllOrderList>;
+        dataOrderList.value = data;
       }
     }catch(e){
-      print(e);
+      print(e.toString()+" Error");
     }finally{
       loadingOrderList(false).obs;
     }

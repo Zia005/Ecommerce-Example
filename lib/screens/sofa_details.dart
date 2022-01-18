@@ -11,7 +11,6 @@ class SofaDetails extends StatefulWidget {
 }
 
 class _SofaDetailsState extends State<SofaDetails> {
-
   late double displayHeight = MediaQuery.of(context).size.height;
   late double displayWidth = MediaQuery.of(context).size.width;
 
@@ -38,7 +37,8 @@ class _SofaDetailsState extends State<SofaDetails> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const [
-                Text('Ceni Volcanic Gray Sofa',
+                Text(
+                  'Ceni Volcanic Gray Sofa',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -50,12 +50,12 @@ class _SofaDetailsState extends State<SofaDetails> {
             Container(
               child: const Text(
                 'Intentionally designed to sit low to the ground, the Ceni '
-                    'Sofa is a contemporary take on a vintage silhouette. '
-                    'Designed with loose cushions, track arm rests, and a '
-                    'solid wood base, the Ceni features a firmly padded back '
-                    'cushion and medium-firm seat composed of sinuous '
-                    'springs and foam for a deep-seated lounge experience. '
-                    'A bit of bounce relaxes for increased comfort overtime.',
+                'Sofa is a contemporary take on a vintage silhouette. '
+                'Designed with loose cushions, track arm rests, and a '
+                'solid wood base, the Ceni features a firmly padded back '
+                'cushion and medium-firm seat composed of sinuous '
+                'springs and foam for a deep-seated lounge experience. '
+                'A bit of bounce relaxes for increased comfort overtime.',
                 textAlign: TextAlign.justify,
               ),
             ),
@@ -63,14 +63,16 @@ class _SofaDetailsState extends State<SofaDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text("Regular Price: 10000৳",
+                Text(
+                  "Regular Price: 10000৳",
                   style: TextStyle(
                     decoration: TextDecoration.lineThrough,
                     color: Colors.red,
                     fontSize: 15,
                   ),
                 ),
-                Text("Discount Price: 9000৳",
+                Text(
+                  "Discount Price: 9000৳",
                   style: TextStyle(
                     fontSize: 15,
                   ),
@@ -79,18 +81,19 @@ class _SofaDetailsState extends State<SofaDetails> {
             ),
             SizedBox(height: displayHeight * 0.02),
             GestureDetector(
-              onTap: (){},
+              onTap: () {},
               child: Container(
-                height: displayHeight * 0.05, width: displayWidth * 0.3,
+                height: displayHeight * 0.05,
+                width: displayWidth * 0.3,
                 decoration: const BoxDecoration(
                   color: Colors.blue,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
-                child:  const Center(
-                  child: Text('ADD TO CART',
-                    style: TextStyle(color: Colors.white),
-                  )
-                ),
+                child: const Center(
+                    child: Text(
+                  'ADD TO CART',
+                  style: TextStyle(color: Colors.white),
+                )),
               ),
             )
           ],

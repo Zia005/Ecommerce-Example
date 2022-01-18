@@ -16,9 +16,10 @@ class LoadAllApiData{
     if(heroResponse.statusCode == 200){
       var jsonDecode = json.decode(heroResponse.body);
       var convertData = json.encode(jsonDecode);
+
       // print(heroResponse.body);
       // print(jsonDecode);
-      // print(convertData);
+      print(convertData +" Done");
       return getOrderListFromJson(convertData);
     }
 
@@ -26,13 +27,14 @@ class LoadAllApiData{
 
   }
 
-  static Future<GetAllCategoryList?> fetchAllCategoryData() async{
+  static Future<List<GetAllCategoryList>?> fetchAllCategoryData() async{
     var url = Uri.parse("https://happybuy.appsticit.com/getallcategory");
     var heroResponse = await http.get(url,headers: {"Content-Type": "application/json"});
     if(heroResponse.statusCode == 200){
       var jsonDecode = json.decode(heroResponse.body);
-      var convertData = json.encode(jsonDecode);
-      return getAllCategoryListFromJson(heroResponse.body);
+      var convertData = json.encode(jsonDecode['data']);
+      print(convertData + " hello");
+      return getAllCategoryListFromJson(convertData);
     }
 
     return null;

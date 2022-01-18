@@ -9,7 +9,6 @@ class ElectronicDevices extends StatefulWidget {
 }
 
 class _ElectronicDevicesState extends State<ElectronicDevices> {
-
   late double displayHeight = MediaQuery.of(context).size.height;
   late double displayWidth = MediaQuery.of(context).size.width;
 
@@ -35,14 +34,15 @@ class _ElectronicDevicesState extends State<ElectronicDevices> {
               // scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const SofaDetails())
-                    );
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SofaDetails()));
                   },
                   child: Container(
                     height: displayHeight * 0.15,
-                    width:  displayWidth * 0.25,
+                    width: displayWidth * 0.25,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -54,14 +54,16 @@ class _ElectronicDevicesState extends State<ElectronicDevices> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         const SizedBox(height: 5),
-                        const Text('Andes Sofa',
+                        const Text(
+                          'Andes Sofa',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: const [
-                            Text("৳ 10000",
+                            Text(
+                              "৳ 10000",
                               style: TextStyle(
                                 decoration: TextDecoration.lineThrough,
                                 color: Colors.red,

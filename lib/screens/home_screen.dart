@@ -17,7 +17,9 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenState createState() {
+    return _HomeScreenState();
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -32,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     getSharedPreferenceData();
-    print(_controller.dataProductList.length.toString()+" hello");
+    // _controller.getAllOrderList();
+    _controller.getAllCategoryList();
+    print(_controller.dataOrderList.length.toString()+" hello");
 
   }
 
@@ -94,119 +98,47 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                         Container(
-                          height: displayHeight * 0.06,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => const ElectronicDevices())
-                                  );
-                                },
-                                child: Container(
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: Text('Electronic Devices',
-                                        style: TextStyle(
-                                          fontSize: 15, fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFFF4EFEF),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(25),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: displayWidth * 0.01),
-                              Container(
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: Text('TV & Home Appliances',
-                                      style: TextStyle(
-                                        fontSize: 15, fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF4EFEF),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: displayWidth * 0.01),
-                              Container(
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: Text('Health & Beauty',
-                                      style: TextStyle(
-                                        fontSize: 15, fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF4EFEF),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: displayWidth * 0.01),
-                              Container(
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: Text('Home & Lifestyle',
-                                      style: TextStyle(
-                                        fontSize: 15, fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF4EFEF),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: displayWidth * 0.01),
-                              Container(
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: Text('Fashion',
-                                      style: TextStyle(
-                                        fontSize: 15, fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF4EFEF),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: displayWidth * 0.01),
-                            ],
+                          height: displayHeight * 0.19,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF4EFEF),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5),
+                            ),
                           ),
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _controller.dataCategoryList.length,
+                            itemBuilder: (context,index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: displayHeight * 0.10,
+                                    width: displayWidth * .20,
+                                    child: Center(
+                                      child: Image.network("https://happybuy.appsticit.com"+_controller.dataCategoryList[index].categoryImage.toString())
+                                    ),
+                                  ),
+                                  Container(
+                                    height: displayHeight * 0.06,
+                                    width: displayWidth * .20,
+                                    child:  Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Center(
+                                        child: Text(_controller.dataCategoryList[index].name.toString(),
+                                          style: TextStyle(
+                                            fontSize: 15, fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
                         )
                       ],
                     ),
