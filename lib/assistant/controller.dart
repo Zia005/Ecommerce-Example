@@ -1,8 +1,9 @@
-import 'package:ecommerce_78/assistant/fetch_all_api_data.dart';
+import 'package:ecommerce_78/assistant/load_all_api_data.dart';
 import 'package:ecommerce_78/model/get_all_category_list.dart';
 import 'package:ecommerce_78/model/get_all_product_list.dart';
 import 'package:ecommerce_78/model/get_all_sliders.dart';
 import 'package:ecommerce_78/model/get_all_user_list.dart';
+import 'package:ecommerce_78/model/get_cart_list_item_list.dart';
 import 'package:ecommerce_78/model/get_order_list.dart';
 import 'package:ecommerce_78/model/get_order_summary.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,13 +16,15 @@ class Controller extends GetxController{
   var loadingProductList = true.obs;
   var loadingSliderList = true.obs;
   var loadingUserList = true.obs;
+  var loadingCartList = true.obs;
   var loadingOrderSummaryList = true.obs;
 
   var dataCategoryList = List<GetAllCategoryList>.empty().obs;
   var dataOrderList = List<GetAllOrderList>.empty().obs;
   var dataProductList = List<GetAllProductList>.empty().obs;
   var dataSliderList = List<GetAllSliderList>.empty().obs;
-  var dataUserList = List<GetAllUserList>.empty().obs;
+  var dataUserList = List<GetAllUsersList>.empty().obs;
+  var dataCartList = List<ModelCartList>.empty().obs;
   var dataOrderSummaryList = List<GetAllOrderSummaryList>.empty().obs;
 
   void init(BuildContext context){
@@ -31,20 +34,23 @@ class Controller extends GetxController{
     getAllSliderList();
     getAllUserList();
     getAllProductList();
+    getAllCartList();
   }
 
   void getAllCategoryList() async{
     try{
       loadingCategoryList(true).obs;
+
       var data = await LoadAllApiData.fetchAllCategoryData();
 
       if(data != null){
-        print(data.toList().toString()+" data");
-        dataCategoryList.value = data;
+        print("Category data retrieved");
+        dataCategoryList.value = data ;
       }
     }catch(e){
       print(e.toString()+ "Category Error");
     }finally{
+      // Future.delayed(Duration(seconds: 2));
       loadingCategoryList(false).obs;
     }
   }
@@ -70,7 +76,7 @@ class Controller extends GetxController{
       var data = await LoadAllApiData.fetchAllProductData();
 
       if(data != null){
-        dataProductList = data as RxList<GetAllProductList>;
+        dataProductList.value = data;
       }
     }catch(e){
       print(e);
@@ -85,7 +91,7 @@ class Controller extends GetxController{
       var data = await LoadAllApiData.fetchAllSliderData();
 
       if(data != null){
-        dataSliderList = data as RxList<GetAllSliderList>;
+        dataSliderList.value = data;
       }
     }catch(e){
       print(e);
@@ -100,12 +106,27 @@ class Controller extends GetxController{
       var data = await LoadAllApiData.fetchAllUserData();
 
       if(data != null){
-        dataUserList = data as RxList<GetAllUserList>;
+        dataUserList.value = data;
       }
     }catch(e){
       print(e);
     }finally{
       loadingUserList(false).obs;
+    }
+  }
+
+  getAllCartList() async{
+    try{
+      loadingCartList(true).obs;
+      var data = await LoadAllApiData.fetchAllCartData();
+
+      if(data != null){
+        dataCartList.value = data.cast<ModelCartList>();
+      }
+    }catch(e){
+      print(e);
+    }finally{
+      loadingCartList(false).obs;
     }
   }
 
@@ -115,7 +136,7 @@ class Controller extends GetxController{
       var data = await LoadAllApiData.fetchAllOrderSummaryData();
 
       if(data != null){
-        dataOrderSummaryList = data as RxList<GetAllOrderSummaryList>;
+        dataOrderSummaryList.value = data as RxList<GetAllOrderSummaryList>;
       }
     }catch(e){
       print(e);

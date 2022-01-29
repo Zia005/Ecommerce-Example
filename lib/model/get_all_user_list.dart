@@ -1,40 +1,16 @@
 // To parse this JSON data, do
 //
-//     final userData = userDataFromJson(jsonString);
+//     final getAllUsersList = getAllUsersListFromJson(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-GetAllUserList getAllUserDataFromJson(String str) => GetAllUserList.fromJson(json.decode(str));
+List<GetAllUsersList> getAllUsersListFromJson(String str) => List<GetAllUsersList>.from(json.decode(str).map((x) => GetAllUsersList.fromJson(x)));
 
-String userDataToJson(GetAllUserList data) => json.encode(data.toJson());
+String getAllUsersListToJson(List<GetAllUsersList> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class GetAllUserList {
-  GetAllUserList({
-    required this.status,
-    required this.msg,
-    required this.data,
-  });
-
-  String status;
-  String msg;
-  List<Datum> data;
-
-  factory GetAllUserList.fromJson(Map<String, dynamic> json) => GetAllUserList(
-    status: json["status"],
-    msg: json["msg"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "status": status,
-    "msg": msg,
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
-  };
-}
-
-class Datum {
-  Datum({
+class GetAllUsersList {
+  GetAllUsersList({
     required this.id,
     required this.name,
     required this.phone,
@@ -60,7 +36,7 @@ class Datum {
   Type? type;
   String token;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory GetAllUsersList.fromJson(Map<String, dynamic> json) => GetAllUsersList(
     id: json["id"],
     name: json["name"],
     phone: json["phone"],
@@ -106,7 +82,7 @@ final typeValues = EnumValues({
 
 class EnumValues<T> {
   Map<String, T> map;
-late  Map<T, String> reverseMap;
+  late Map<T, String> reverseMap;
 
   EnumValues(this.map);
 
