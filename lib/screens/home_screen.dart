@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 200,
                           child: Obx((){
                             if(_controller.loadingSliderList.value){
-                              return CircularProgressIndicator();
+                              return Center(child: CircularProgressIndicator());
                             }else{
                               return CarouselSlider.builder(
                                 itemCount: _controller.dataSliderList.length,
@@ -335,7 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           children: [
                                             ElevatedButton(
                                                 onPressed: (){
-
+                                                  insertUpdate(index);
                                                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                                                 },
                                                 child: Text(
